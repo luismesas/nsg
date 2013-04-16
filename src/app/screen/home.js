@@ -66,6 +66,10 @@ iris.screen(function(self) {
 		self.destroyUIs('tab-class');
 		self.ui('tab-class', iris.path.ui.class.js, param);
 
+		self.get('title-iris-resource').html('resource/'+service.name + '.js');
+		self.destroyUIs('tab-iris-resource');
+		self.ui('tab-iris-resource', iris.path.ui.iris.resource.js, param);
+
 		self.destroyUIs('tab-paths');
 		self.ui('tab-paths', iris.path.ui.paths.js, param);
 

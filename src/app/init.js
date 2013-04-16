@@ -14,6 +14,9 @@ iris.path = {
 			get: {js: 'ui/path/get.js', html: 'ui/path/get.html'},
 			post: {js: 'ui/path/post.js', html: 'ui/path/post.html'},
 			delete: {js: 'ui/path/delete.js', html: 'ui/path/delete.html'}
+		},
+		iris : {
+			resource: {js: 'ui/iris/resource.js', html: 'ui/iris/resource.html'}
 		}
 	}
 };
