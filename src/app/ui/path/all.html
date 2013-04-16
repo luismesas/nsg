@@ -1,0 +1,15 @@
+<pre class="prettyprint lang-js">
+var ##name## = require('../##name##');
+
+function handler(req, res){
+	##name##.##fn##(function(err, data){
+		if(err || data === null){
+			res.send(400, 'Bad request');
+		} else {
+			res.send(data);
+		}
+	});
+}
+
+module.exports = handler;
+</pre>

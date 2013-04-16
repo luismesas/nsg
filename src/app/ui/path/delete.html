@@ -1,0 +1,13 @@
+<pre class="prettyprint lang-js">
+var ##name## = require('../##name##');
+
+function handler(req, res){
+	var id = req.params.id;
+
+	##name##.##fn##(id, function(){
+		res.send(200, '');
+	});
+}
+
+module.exports = handler;
+</pre>

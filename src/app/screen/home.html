@@ -1,0 +1,62 @@
+<div class="span12">
+	<div class="content">
+		<div class="row">
+
+			<div class="span5 well">
+				<form class="form-horizontal">
+					<legend>DTO</legend>
+					<div class="control-group">
+						<label class="control-label">Name</label>
+						<div class="controls">
+							<input type="text" data-id="txtName" value="feeder"/>
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label">Acronym</label>
+						<div class="controls">
+							<input type="text" data-id="txtAcronym" value="fdr"/>
+						</div>
+					</div>
+					<div class="form-actions">
+						<button type="submit" class="btn btn-info" data-id="btnGenerate">GENERATE</button>
+					</div>
+				</form>
+			</div>
+
+			<div class="span5 well">
+				<form class="form-horizontal">
+					<legend>DTO Data</legend>
+					<textarea rows="8" class="span12" data-id="txtDto">{
+	"_id"		: "",
+	"name"		: "",
+	"host"		: "",
+	"clientId"	: "",
+	"secretKey"	: "",
+	"kind"		: [
+		{
+			"_id"	: "",
+			"name"	: "",
+			"lbl"	: ""
+		}
+	]
+}</textarea>
+				</form>
+			</div>
+
+			<div>
+			</div>
+
+			<div class="span11 well">
+				<ul class="nav nav-tabs" data-id="tabs" style="display:none;" id="tabs">
+					<li><a href="#tab-class" data-toggle="tab" data-id="title-class">class.js</a></li>
+					<li><a href="#tab-paths" data-toggle="tab" data-id="title-paths">paths.js</a></li>
+				</ul>
+				<div class="tab-content" data-id="tabs-content">
+					<div id="tab-class" class="tab-pane"><div class="code" data-id="tab-class"></div></div>
+					<div id="tab-paths" class="tab-pane"><div class="code" data-id="tab-paths"></div></div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</div>

@@ -1,0 +1,17 @@
+<pre class="prettyprint lang-js">
+var ##name## = require('../##name##');
+
+function handler(req, res){
+	var id = req.params.id;
+
+	##name##.##fn##(id, function(err, ##acro##){
+		if(err || ##acro## === null){
+			res.send(400, 'Bad request');
+		} else {
+			res.send(##acro##);
+		}
+	});
+}
+
+module.exports = handler;
+</pre>
