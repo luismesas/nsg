@@ -20,7 +20,7 @@ iris.ui(function(self) {
 		var childs = service.childs;
 		var c,C=childs.length;
 		for(c=0;c<C;c++){
-			dtoString += '	new'+service.Acro+'.'+childs[c]+' = [];\n';
+			dtoString += '	new'+service.Acro+'.'+childs[c].name+' = [];\n';
 		}
 
 		service.dtoString = dtoString;
