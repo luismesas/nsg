@@ -85,7 +85,7 @@ iris.ui(function(self) {
 		block += '					p_cbk(null, '+obj.acro+');\n';
 		block += '				}\n';
 		block += '			});\n';
-		block += '		}\n';
+		block += '		}';
 
 		return block;
 	}

@@ -97,7 +97,7 @@ iris.screen(function(self) {
 		}
 
 		if(!found){
-			self.get('tabs').append('<li><a href="#tab-path_'+pathBlockCount+'" data-toggle="tab">path/'+service.name+'_'+name+'.js</a></li>');
+			self.get('tabs-titles').append('<li><a href="#tab-path_'+pathBlockCount+'" data-toggle="tab">path/'+service.name+'_'+name+'.js</a></li>');
 			self.get('tabs-content').append('<div id="tab-path_'+pathBlockCount+'" class="tab-pane"><div class="code" data-id="tab-path_'+pathBlockCount+'"></div></div>');
 		}
 

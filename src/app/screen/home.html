@@ -1,10 +1,10 @@
 <div class="span12">
-	<div class="content">
-		<div class="row">
+	<div class="content-fluid">
+		<div class="row-fluid">
 
-			<div class="span5 well">
+			<div class="span6 well">
 				<form class="form-horizontal">
-					<legend>DTO</legend>
+					<legend>Info</legend>
 					<div class="control-group">
 						<label class="control-label">Name</label>
 						<div class="controls">
@@ -17,15 +17,12 @@
 							<input type="text" data-id="txtAcronym" value="fdr"/>
 						</div>
 					</div>
-					<div class="form-actions">
-						<button type="submit" class="btn btn-info" data-id="btnGenerate">GENERATE</button>
-					</div>
 				</form>
 			</div>
 
-			<div class="span5 well">
+			<div class="span6 well">
 				<form class="form-horizontal">
-					<legend>DTO Data</legend>
+					<legend>DTO</legend>
 					<textarea rows="8" class="span12" data-id="txtDto">{
 	"_id"		: "",
 	"name"		: "",
@@ -45,9 +42,17 @@
 
 			<div>
 			</div>
+		</div>
 
-			<div class="span11 well">
-				<ul class="nav nav-tabs" data-id="tabs" style="display:none;" id="tabs">
+		<div class="row-fluid">
+			<div class="span12 well">
+				<button type="submit" class="btn btn-info" data-id="btnGenerate">GENERATE</button>
+			</div>
+		</div>
+
+		<div class="row-fluid" data-id="tabs" style="display:none;">
+			<div class="span12 well">
+				<ul class="nav nav-tabs" data-id="tabs-titles" id="tabs">
 					<li><a href="#tab-class" data-toggle="tab" data-id="title-class">class.js</a></li>
 					<li><a href="#tab-paths" data-toggle="tab" data-id="title-paths">paths.js</a></li>
 					<li><a href="#tab-iris-resource" data-toggle="tab" data-id="title-iris-resource">iris-resource.js</a></li>
