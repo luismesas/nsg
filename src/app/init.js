@@ -8,7 +8,6 @@ iris.path = {
 	ui : {
 		class : {js: 'ui/class.js', html: 'ui/class.html'},
 		paths : {js: 'ui/paths.js', html: 'ui/paths.html'},
-		init : {js: 'ui/init.js', html: 'ui/init.html'},
 		path : {
 			all: {js: 'ui/path/all.js', html: 'ui/path/all.html'},
 			put: {js: 'ui/path/put.js', html: 'ui/path/put.html'},
@@ -17,7 +16,9 @@ iris.path = {
 			delete: {js: 'ui/path/delete.js', html: 'ui/path/delete.html'}
 		},
 		iris : {
+			init : {js: 'ui/iris/init.js', html: 'ui/iris/init.html'},
 			resource: {js: 'ui/iris/resource.js', html: 'ui/iris/resource.html'},
+			lang: {js: 'ui/iris/lang.js', html: 'ui/iris/lang.html'},
 			screen_html: {js: 'ui/iris/screen_html.js', html: 'ui/iris/screen_html.html'},
 			screen_js: {js: 'ui/iris/screen_js.js', html: 'ui/iris/screen_js.html'},
 			list_html: {js: 'ui/iris/list_html.js', html: 'ui/iris/list_html.html'},

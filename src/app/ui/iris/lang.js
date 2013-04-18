@@ -3,13 +3,13 @@ iris.ui(function(self) {
 	self.create = function() {
 		self.tmplMode(self.APPEND);
 
-		var sintax = self.setting('service');
+		var service = self.setting('service');
 
-		self.tmpl(iris.path.ui.init.html, sintax);
+		self.tmpl(iris.path.ui.iris.lang.html, service);
 		prettyPrint();
 	};
 
 	self.awake = function(){
 	};
 
-}, iris.path.ui.init.js);
+}, iris.path.ui.iris.lang.js);

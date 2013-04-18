@@ -85,7 +85,8 @@ iris.screen(function(self) {
 		generateTab('path-delete', 'app/path/'+service.name+'_'+service.name+'id_delete.js', iris.path.ui.path.delete.js);
 
 		// Iris files
-		generateTab('init', 'www/app/init.js', iris.path.ui.init.js);
+		generateTab('init', 'www/app/init.js', iris.path.ui.iris.init.js);
+		generateTab('lang', 'www/app/lang/en-us.js', iris.path.ui.iris.lang.js);
 		generateTab('iris-resource', 'www/app/resource/'+service.name + '.js', iris.path.ui.iris.resource.js);
 		// Iris - Screen
 		generateTab('iris-screen-html', 'www/app/screen/'+service.name + '.html', iris.path.ui.iris.screen_html.js);
