@@ -15,7 +15,7 @@ iris.screen(function(self) {
 
 	var defaultProp = {
 		readonly : false,
-		length : 10,
+		length : 16,
 		auto : "none"
 	};
 
@@ -82,7 +82,8 @@ iris.screen(function(self) {
 		generateTab('path-put', 'app/path/'+service.name+'_put.js', iris.path.ui.path.put.js);
 		generateTab('path-get', 'app/path/'+service.name+'_'+service.name+'id_get.js', iris.path.ui.path.get.js);
 		generateTab('path-post', 'app/path/'+service.name+'_'+service.name+'id_post.js', iris.path.ui.path.post.js);
-		generateTab('path-delete', 'app/path/'+service.name+'_'+service.name+'id_delete.js', iris.path.ui.path.delete.js);
+		generateTab('path-del', 'app/path/'+service.name+'_'+service.name+'id_del.js', iris.path.ui.path.del.js);
+		generateTab('path-generate', 'app/path/'+service.name+'_'+service.name+'id_generate_field_post.js', iris.path.ui.path.generate.js);
 
 		// Iris files
 		generateTab('init', 'www/app/init.js', iris.path.ui.iris.init.js);

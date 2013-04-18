@@ -6,11 +6,11 @@ iris.ui(function(self) {
 		var dto = self.setting('service');
 		dto.fn = 'remove'+dto.Name+'FromId';
 
-		self.tmpl(iris.path.ui.path.delete.html, dto);
+		self.tmpl(iris.path.ui.path.del.html, dto);
 		prettyPrint();
 	};
 
 	self.awake = function(){
 	};
 
-}, iris.path.ui.path.delete.js);
+}, iris.path.ui.path.del.js);

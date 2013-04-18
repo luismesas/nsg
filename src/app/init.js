@@ -13,7 +13,8 @@ iris.path = {
 			put: {js: 'ui/path/put.js', html: 'ui/path/put.html'},
 			get: {js: 'ui/path/get.js', html: 'ui/path/get.html'},
 			post: {js: 'ui/path/post.js', html: 'ui/path/post.html'},
-			delete: {js: 'ui/path/delete.js', html: 'ui/path/delete.html'}
+			del: {js: 'ui/path/del.js', html: 'ui/path/del.html'},
+			generate: {js: 'ui/path/generate.js', html: 'ui/path/generate.html'}
 		},
 		iris : {
 			init : {js: 'ui/iris/init.js', html: 'ui/iris/init.html'},

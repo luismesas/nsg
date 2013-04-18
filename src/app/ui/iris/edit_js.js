@@ -18,10 +18,16 @@ iris.ui(function(self) {
 			var key = prop.name;
 			if(key === '_id') continue;
 			var Key = key.substr(0,1).toUpperCase()+key.substr(1);
-			if(!prop.readonly) setupString += '		setup(\''+Key+'\');\n';
+
+			if(!prop.readonly){
+				if(prop.auto == 'none') setupString += '		setup(\''+Key+'\');\n';
+				if(prop.auto == 'random') setupString += '		self.get(\'btn'+Key+'\').click(function(){generate(\''+Key+'\');});\n';
+			}
+
 			valuesString += '		self.get(\'lbl'+Key+'\').html('+service.acro+'.'+key+');\n';
 			valuesString += '		self.get(\'txt'+Key+'\').val('+service.acro+'.'+key+');\n';
 			if(!prop.readonly) valuesString += '		self.get(\'btn'+Key+'\').show();\n';
+
 			saveString += '		_'+service.acro+'.'+key+' = self.get(\'txt'+Key+'\').val();\n';
 		}
 

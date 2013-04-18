@@ -16,6 +16,7 @@ iris.ui(function(self) {
 	};
 
 	function generateFunctionsBlock(obj){
+		var p,prop;
 		var block = '';
 
 		block += '		// ----------------\n';
@@ -35,8 +36,8 @@ iris.ui(function(self) {
 		block += '		self.create'+obj.Name+' = function('+obj.acro+', p_cbk){\n';
 
 		//auto generators
-		for(var p=0;p<obj.props.length;p++){
-			var prop = obj.props[p];
+		for(p=0;p<obj.props.length;p++){
+			prop = obj.props[p];
 			if(prop.auto == 'random'){
 				block += '			fdr.'+prop.name+' = _createToken('+prop.length+');\n';
 			}
@@ -94,7 +95,32 @@ iris.ui(function(self) {
 		block += '					p_cbk(null, '+obj.acro+');\n';
 		block += '				}\n';
 		block += '			});\n';
-		block += '		};';
+		block += '		};\n';
+		block += '\n';
+
+		//auto generators
+		block += '		var fieldsLength = {};\n';
+		for(p=0;p<obj.props.length;p++){
+			prop = obj.props[p];
+			if(prop.auto == 'random'){
+				block += '		fieldsLength[\''+prop.name+'\'] = '+prop.length+';\n';
+			}
+		}
+		block += '		// Generates a new value for field for given '+obj.name+'\n';
+		block += '		self.generate = function ('+obj.acro+'Id, field, f_callback){\n';
+		block += '			var find = {\n';
+		block += '				_id : new ObjectID(String('+obj.acro+'Id))\n';
+		block += '			};\n';
+		block += '\n';
+		block += '			var jSet = {};\n';
+		block += '			jSet[field] = _createToken(fieldsLength[field]);\n';
+		block += '			var set = {\n';
+		block += '				$set : jSet\n';
+		block += '			};\n';
+		block += '\n';
+		block += '			'+obj.dbCol+'.findAndModify(find,[],set,{\'new\' : true},f_callback);\n';
+		block += '		};\n';
+
 
 		return block;
 	}

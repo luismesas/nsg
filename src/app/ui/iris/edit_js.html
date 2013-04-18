@@ -8,7 +8,7 @@
 
 		//Setup interactions
 ##setupString##
-		self.get('btnDelete').click(deleteApp);
+		self.get('btnDelete').click(delete##Acro##);
 
 		$(self.get('btnDelete')).tooltip();
 
@@ -102,25 +102,57 @@
 	// ----------------
 	// Delete ##Name##
 	// ----------------
-	function deleteApp(){
+	function delete##Acro##(){
 		self.get('btnDelete').addClass('icon-spin');
 		bootbox.confirm('Are you sure you want to delete ##name## "'+ _##acro##.name +'"?', function(p_confirm){
 			if(p_confirm){
-				iris.resource(iris.path.resource.##acro##).removeFromId(_##acro##._id, deleteAppOk, deleteAppKo);
+				iris.resource(iris.path.resource.##acro##).removeFromId(_##acro##._id, delete##Acro##Ok, delete##Acro##Ko);
 			} else {
 				self.get('btnDelete').removeClass('icon-spin');
 			}
 		});
 	}
 
-	function deleteAppOk(){
+	function delete##Acro##Ok(){
 		self.notify(iris.evts.##acro##.deleted);
 		self.get('btnDelete').removeClass('icon-spin');
 		self.get('root').hide();
 	}
 
-	function deleteAppKo(){
+	function delete##Acro##Ko(){
 		self.get('btnDelete').removeClass('icon-spin');
+	}
+
+	// ----------------
+	// Generate Randoms
+	// ----------------
+	function generate(p_txt){
+		var field = p_txt.substr(0,1).toLowerCase() + p_txt.substr(1);
+		self.get('btn'+p_txt).addClass('icon-spin');
+		bootbox.confirm('Are you sure you want to generate a new '+p_txt+' for ##name## "'+ _fdr.name +'"?', function(p_confirm){
+			if(p_confirm){
+				iris.resource(iris.path.resource.##acro##).generate(
+					_fdr._id,
+					field,
+					function(p_data){generateOk(p_txt,p_data);},
+					function(){generateKo(p_txt);}
+					);
+			} else {
+				self.get('btn'+p_txt).removeClass('icon-spin');
+			}
+		});
+	}
+
+	function generateOk(p_txt, p_data){
+		_fdr.secretKey = p_data.secretKey;
+		self.notify(iris.evts.##acro##.changed, _fdr);
+		##acro##Selected(_fdr);
+
+		self.get('btn'+p_txt).removeClass('icon-spin');
+	}
+
+	function generateKo(p_txt){
+		self.get('btn'+p_txt).removeClass('icon-spin');
 	}
 
 }, iris.path.ui.##acro##.edit.js);

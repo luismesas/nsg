@@ -24,6 +24,11 @@ exports.paths = [
 		method : 'DELETE',
 		path : '/##acro##/:##acro##id',
 		handler : require('./path/##name##_##name##id_delete')
+	},
+	{
+		method : 'POST',
+		path : '/##acro##/:##acro##id/generate/:field',
+		handler : require('./path/##name##_##name##id_generate_field_post')
 	}
 ]
 </pre>
