@@ -12,7 +12,7 @@ iris.ui(function(self) {
 		var keys = service.props;
 		var k,K=keys.length;
 		for(k=0;k<K;k++){
-			var key = keys[k];
+			var key = keys[k].name;
 			if(key == '_id') continue;
 			dtoString += '	if(req.body.'+key+' !== undefined) upd'+service.Acro+'.'+key+' = req.body.'+key+';\n';
 		}
