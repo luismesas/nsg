@@ -43,6 +43,7 @@ iris.screen(function(self) {
 						service.childs.push(child);
 					} else {
 						$.extend(prop, defaultProp, value);
+						if(prop.name == '_id') prop.readonly = true;
 						console.log(key, prop);
 						service.props.push(prop);
 					}
@@ -112,10 +113,24 @@ iris.screen(function(self) {
 			self.destroyUIs('tab-'+dataId);
 		} catch(err){
 			self.get('tabs-titles').append('<li><a href="#tab-'+dataId+'" data-toggle="tab">'+title+'</a></li>');
-			self.get('tabs-content').append('<div id="tab-'+dataId+'" class="tab-pane"><div class="code" data-id="tab-'+dataId+'"></div></div>');
+
+			var content = '';
+			content += '<div id="tab-'+dataId+'" class="tab-pane">';
+			content += '	<i class="icon-cloud-download" data-id="icon'+dataId+'Download"></i>';
+			content += '	<div class="code" data-id="tab-'+dataId+'"></div>';
+			content += '</div>';
+			self.get('tabs-content').append(content);
+
 		}
-		self.ui('tab-'+dataId, ui, {service:service});
+		var code = self.ui('tab-'+dataId, ui, {service:service});
+		// self.get('icon'+dataId+'Download').click(function(e){btnDownload(dataId,title,code,e);});
 	}
 
+	function btnDownload(dataId,title,code,e){
+		e.preventDefault();
+		var filename = title.match(/([^/]*)$/g)[0];
+		var blob = new Blob([self.get('tab-'+dataId).html()], {type: "text/plain;charset=utf-8"});
+		saveAs(blob, filename);
+	}
 
 }, iris.path.screen.home.js);
