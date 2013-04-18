@@ -68,12 +68,22 @@ iris.ui(function(self) {
 		block += '		};\n';
 		block += '\n';
 		block += '		// Updates '+obj.names+' that matchs id\n';
-		block += '		self.update'+obj.Name+'FromId = function('+obj.acro+'Id, set, p_cbk){\n';
+		block += '		self.update'+obj.Name+'FromId = function(p_'+obj.acro+'Id, p_set, p_cbk){\n';
+		//read only
+		for(p=0;p<obj.props.length;p++){
+			prop = obj.props[p];
+			if(prop.readonly){
+				block += '			delete p_set.'+prop.name+';\n';
+			}
+		}
 		block += '			var find = {\n';
-		block += '				_id: ObjectID(String('+obj.acro+'Id))\n';
+		block += '				_id: ObjectID(String(p_'+obj.acro+'Id))\n';
+		block += '			};\n';
+		block += '			var set = {\n';
+		block += '				$set : p_set\n';
 		block += '			};\n';
 		block += '\n';
-		block += '			'+obj.dbCol+'.update(find, set, function(err,'+obj.acro+'){\n';
+		block += '			'+obj.dbCol+'.findAndModify(find, [], set, {\'new\' : true}, function(err,'+obj.acro+'){\n';
 		block += '				if(err || '+obj.acro+' === null){\n';
 		block += '					p_cbk(err, null);\n';
 		block += '				} else {\n';
