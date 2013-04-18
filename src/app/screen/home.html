@@ -27,8 +27,8 @@
 	"_id"		: "",
 	"name"		: "",
 	"host"		: "",
-	"clientId"	: "",
-	"secretKey"	: "",
+	"clientId"	: {"auto":"random","length":16,"readonly":true},
+	"secretKey"	: {"auto":"random","length":32},
 	"kind"		: [
 		{
 			"_id"	: "",
@@ -38,6 +38,9 @@
 	]
 }</textarea>
 				</form>
+				<div class="alert alert-error" style="display:none;" data-id="alertContainer">
+					<strong>Error!</strong><div data-id="alertText">Best check yo self, you're not looking too good.</div>
+				</div>
 			</div>
 
 			<div>

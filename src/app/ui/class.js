@@ -87,7 +87,7 @@ iris.ui(function(self) {
 		block += '				_id: ObjectID(String('+obj.acro+'Id))\n';
 		block += '			};\n';
 		block += '\n';
-		block += '			'+obj.dbCol+'.remove(find, set, function(err,'+obj.acro+'){\n';
+		block += '			'+obj.dbCol+'.remove(find, function(err,'+obj.acro+'){\n';
 		block += '				if(err || '+obj.acro+' === null){\n';
 		block += '					p_cbk(err, null);\n';
 		block += '				} else {\n';

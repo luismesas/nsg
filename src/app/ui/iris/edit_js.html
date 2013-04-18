@@ -104,9 +104,9 @@
 	// ----------------
 	function deleteApp(){
 		self.get('btnDelete').addClass('icon-spin');
-		bootbox.confirm('Are you sure you want to delete the app "'+ _##acro##.name +'"?', function(p_confirm){
+		bootbox.confirm('Are you sure you want to delete ##name## "'+ _##acro##.name +'"?', function(p_confirm){
 			if(p_confirm){
-				iris.resource(iris.path.resource.app).remove(_##acro##._id, deleteAppOk, deleteAppKo);
+				iris.resource(iris.path.resource.##acro##).removeFromId(_##acro##._id, deleteAppOk, deleteAppKo);
 			} else {
 				self.get('btnDelete').removeClass('icon-spin');
 			}
