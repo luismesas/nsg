@@ -104,7 +104,7 @@
 	// ----------------
 	function delete##Acro##(){
 		self.get('btnDelete').addClass('icon-spin');
-		bootbox.confirm('Are you sure you want to delete ##name## "'+ _##acro##.name +'"?', function(p_confirm){
+		bootbox.confirm('Are you sure you want to delete selected ##name##?', function(p_confirm){
 			if(p_confirm){
 				iris.resource(iris.path.resource.##acro##).removeFromId(_##acro##._id, delete##Acro##Ok, delete##Acro##Ko);
 			} else {
@@ -129,10 +129,10 @@
 	function generate(p_txt){
 		var field = p_txt.substr(0,1).toLowerCase() + p_txt.substr(1);
 		self.get('btn'+p_txt).addClass('icon-spin');
-		bootbox.confirm('Are you sure you want to generate a new '+p_txt+' for ##name## "'+ _fdr.name +'"?', function(p_confirm){
+		bootbox.confirm('Are you sure you want to generate a new '+p_txt+' for selected ##name##?', function(p_confirm){
 			if(p_confirm){
 				iris.resource(iris.path.resource.##acro##).generate(
-					_fdr._id,
+					_##acro##._id,
 					field,
 					function(p_data){generateOk(p_txt,p_data);},
 					function(){generateKo(p_txt);}
@@ -144,9 +144,10 @@
 	}
 
 	function generateOk(p_txt, p_data){
-		_fdr.secretKey = p_data.secretKey;
-		self.notify(iris.evts.##acro##.changed, _fdr);
-		##acro##Selected(_fdr);
+		var field = p_txt.substr(0,1).toLowerCase() + p_txt.substr(1);
+		_##acro##[field] = p_data[field];
+		self.notify(iris.evts.##acro##.changed, _##acro##);
+		##acro##Selected(_##acro##);
 
 		self.get('btn'+p_txt).removeClass('icon-spin');
 	}
