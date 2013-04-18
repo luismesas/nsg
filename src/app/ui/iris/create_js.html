@@ -1,0 +1,59 @@
+<pre class="prettyprint lang-js"><xmp class="prettyprint lang-js">iris.ui(function(self) {
+
+	var _##acro## = null;
+
+	self.create = function() {
+		self.tmpl(iris.path.ui.##acro##.create.html);
+
+		self.get('btnSave').click(save);
+		self.get('btnCancel').click(cancel);
+
+		self.on(iris.evts.##acro##.selected, ##acro##Selected);
+		self.on(iris.evts.##acro##.create, ##acro##Create);
+		self.on(iris.evts.screen.change, function(){self.get('root').hide();});
+	};
+
+	function cancel(){
+		self.get('root').hide();
+	}
+
+	function save(){
+		save##Acro##();
+	}
+
+	// ---------------
+	// Save ##Name##
+	// ---------------
+
+	function save##Acro##(){
+		var ##acro## = {
+##dtoString##		};
+
+		iris.resource(iris.path.resource.##acro##).create(##acro##, save##Acro##Ok, save##Acro##Ko);
+	}
+
+	function reset(){
+##resetString##
+		self.get('root').hide();		
+	}
+
+	function save##Acro##Ok(p_txt){
+		reset();
+		self.notify(iris.evts.##acro##.created);
+	}
+
+	function save##Acro##Ko(p_txt){
+		reset();
+	}
+
+	function ##acro##Selected(app){
+		reset();
+	}
+
+	function ##acro##Create(){
+		self.get('root').show();
+	}
+
+}, iris.path.ui.##acro##.create.js);
+</xmp>
+</pre>

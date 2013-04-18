@@ -49,60 +49,56 @@ iris.screen(function(self) {
 
 		generateDto();
 
-		//Service Name
+		// Prepares service object
 		service.name = self.get('txtName').val().toLowerCase();
 		service.acro = self.get('txtAcronym').val().toLowerCase();
 
-		service.Name = service.name.substr(0,1).toUpperCase() + service.name.substr(1);
-		service.Acro = service.acro.substr(0,1).toUpperCase() + service.acro.substr(1);
+		service.NAME = service.name.toUpperCase();
+		service.Name = service.NAME.substr(0,1) + service.name.substr(1);
+		service.ACRO = service.acro.toUpperCase();
+		service.Acro = service.ACRO.substr(0,1) + service.acro.substr(1);
 		service.names = service.name + 's';
 		service.Names = service.Name + 's';
 		service.acros = service.acro + 's';
 
-		var param = {service:service};
+		// nodejs files
+		generateTab('class', 'app/'+service.name + '.js', iris.path.ui.class.js);
+		generateTab('paths', 'app/paths.js', iris.path.ui.paths.js);
+		generateTab('path-all', 'app/path/'+service.name+'_get.js', iris.path.ui.path.all.js);
+		generateTab('path-put', 'app/path/'+service.name+'_put.js', iris.path.ui.path.put.js);
+		generateTab('path-get', 'app/path/'+service.name+'_'+service.name+'id_get.js', iris.path.ui.path.get.js);
+		generateTab('path-post', 'app/path/'+service.name+'_'+service.name+'id_post.js', iris.path.ui.path.post.js);
+		generateTab('path-delete', 'app/path/'+service.name+'_'+service.name+'id_delete.js', iris.path.ui.path.delete.js);
+
+		// Iris files
+		generateTab('init', 'www/app/init.js', iris.path.ui.init.js);
+		generateTab('iris-resource', 'www/app/resource/'+service.name + '.js', iris.path.ui.iris.resource.js);
+		// Iris - Screen
+		generateTab('iris-screen-html', 'www/app/screen/'+service.name + '.html', iris.path.ui.iris.screen_html.js);
+		generateTab('iris-screen-js', 'www/app/screen/'+service.name + '.js', iris.path.ui.iris.screen_js.js);
+		// Iris - UIs
+		generateTab('iris-ui-list-html', 'www/app/ui/'+service.name + '/list.html', iris.path.ui.iris.list_html.js);
+		generateTab('iris-ui-list-js', 'www/app/ui/'+service.name + '/list.js', iris.path.ui.iris.list_js.js);
+		generateTab('iris-ui-item-html', 'www/app/ui/'+service.name + '/item.html', iris.path.ui.iris.item_html.js);
+		generateTab('iris-ui-item-js', 'www/app/ui/'+service.name + '/item.js', iris.path.ui.iris.item_js.js);
+		generateTab('iris-ui-create-html', 'www/app/ui/'+service.name + '/create.html', iris.path.ui.iris.create_html.js);
+		generateTab('iris-ui-create-js', 'www/app/ui/'+service.name + '/create.js', iris.path.ui.iris.create_js.js);
+		generateTab('iris-ui-edit-html', 'www/app/ui/'+service.name + '/edit.html', iris.path.ui.iris.edit_html.js);
+		generateTab('iris-ui-edit-js', 'www/app/ui/'+service.name + '/edit.js', iris.path.ui.iris.edit_js.js);
+
+		// Show tabs
 		self.get('tabs').show();
-
-		self.get('title-class').html(service.name + '.js');
-		self.destroyUIs('tab-class');
-		self.ui('tab-class', iris.path.ui.class.js, param);
-
-		self.get('title-iris-resource').html('resource/'+service.name + '.js');
-		self.destroyUIs('tab-iris-resource');
-		self.ui('tab-iris-resource', iris.path.ui.iris.resource.js, param);
-
-		self.destroyUIs('tab-paths');
-		self.ui('tab-paths', iris.path.ui.paths.js, param);
-
-		pathBlockCount = 0;
-		generatePathBlock('all', iris.path.ui.path.all);
-		generatePathBlock('put', iris.path.ui.path.put);
-		generatePathBlock('get', iris.path.ui.path.get);
-		generatePathBlock('post', iris.path.ui.path.post);
-		generatePathBlock('delete', iris.path.ui.path.delete);
 	}
 
-	var pathBlockCount = 0;
-	function generatePathBlock(name, ui){
-		pathBlockCount++;
-		var param = {
-			service: service
-		};
-
-		var found = false;
+	function generateTab(dataId, title, ui, param){
 		try{
-			self.get('tab-path_'+pathBlockCount);
-			found = true;
+			self.get('tab-'+dataId);
+			self.destroyUIs('tab-'+dataId);
 		} catch(err){
-			found = false;
+			self.get('tabs-titles').append('<li><a href="#tab-'+dataId+'" data-toggle="tab">'+title+'</a></li>');
+			self.get('tabs-content').append('<div id="tab-'+dataId+'" class="tab-pane"><div class="code" data-id="tab-'+dataId+'"></div></div>');
 		}
-
-		if(!found){
-			self.get('tabs-titles').append('<li><a href="#tab-path_'+pathBlockCount+'" data-toggle="tab">path/'+service.name+'_'+name+'.js</a></li>');
-			self.get('tabs-content').append('<div id="tab-path_'+pathBlockCount+'" class="tab-pane"><div class="code" data-id="tab-path_'+pathBlockCount+'"></div></div>');
-		}
-
-		self.destroyUIs('tab-path_'+pathBlockCount);
-		self.ui('tab-path_'+pathBlockCount, ui.js, param);
+		self.ui('tab-'+dataId, ui, {service:service});
 	}
 
 

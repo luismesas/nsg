@@ -2,7 +2,7 @@
 var ##name## = require('../##name##');
 
 function handler(req, res){
-	var id = req.params.id;
+	var id = req.params.##acro##id;
 
 	##name##.##fn##(id, function(){
 		res.send(200, '');

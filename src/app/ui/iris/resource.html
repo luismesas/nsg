@@ -6,23 +6,23 @@ iris.resource(
 			return self.get('/##acro##', f_ok, f_error);
 		};
 
-		self.create = function( p_##acro##, p_callback, f_ok, f_error) {
+		self.create = function( p_##acro##, f_ok, f_error) {
 			return self.put('/##acro##', p_##acro##, f_ok);
 		};
 
 		self.getFromId = function(p_##acro##Id, f_ok, f_error){
-			return self.get('/##acro##/:' + p_##acro##Id, f_ok, f_error);
+			return self.get('/##acro##/' + p_##acro##Id, f_ok, f_error);
 		};
 
-		self.updateFromId = function(p_appId, f_ok, f_error){
-			return self.post('/##acro##/:' + p_##acro##Id, p_##acro##, f_ok, f_error);
+		self.updateFromId = function(p_##acro##Id, p_##acro##, f_ok, f_error){
+			return self.post('/##acro##/' + p_##acro##Id, p_##acro##, f_ok, f_error);
 		};
 
-		self.removeFromId = function(p_appId, f_ok, f_error) {
-			return self.del('/##acro##/:' + p_##acro##Id, f_ok, f_error);
+		self.removeFromId = function(p_##acro##Id, f_ok, f_error) {
+			return self.del('/##acro##/' + p_##acro##Id, f_ok, f_error);
 		};
 
 	},
-	iris.path.resource.##name##
+	iris.path.resource.##acro##
 );
 </pre>

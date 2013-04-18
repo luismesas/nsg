@@ -15,6 +15,7 @@ module.exports = hero.worker (
 
 		// Configuration
 		app.configure(function() {
+			app.use( express.static(__dirname + '/../www') );
 			app.use(express.bodyParser());
 			app.use(pastry.parseCookies({
 				cookie: self.config.api.##acro##.cookie

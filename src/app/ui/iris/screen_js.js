@@ -5,11 +5,11 @@ iris.ui(function(self) {
 
 		var service = self.setting('service');
 
-		self.tmpl(iris.path.ui.iris.resource.html, service);
+		self.tmpl(iris.path.ui.iris.screen_js.html, service);
 		prettyPrint();
 	};
 
 	self.awake = function(){
 	};
 
-}, iris.path.ui.iris.resource.js);
+}, iris.path.ui.iris.screen_js.js);

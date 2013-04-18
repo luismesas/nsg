@@ -13,14 +13,14 @@ iris.ui(function(self) {
 		var k,K=keys.length;
 		for(k=0;k<K;k++){
 			if(keys[k] == '_id') continue;
-			dtoString += '	if(req.body.'+keys[k]+' !== undefined) new'+service.Acro+'.'+keys[k]+' = req.body.'+keys[k]+';\n';
+			dtoString += '	if(req.body.'+keys[k]+' !== undefined) upd'+service.Acro+'.'+keys[k]+' = req.body.'+keys[k]+';\n';
 		}
 
 		//child arrays
 		var childs = service.childs;
 		var c,C=childs.length;
 		for(c=0;c<C;c++){
-			dtoString += '	if(req.body.'+childs[c].name+' !== undefined) new'+service.Acro+'.'+childs[c].name+' = req.body.'+childs[c].name+';\n';
+			dtoString += '	if(req.body.'+childs[c].name+' !== undefined) upd'+service.Acro+'.'+childs[c].name+' = req.body.'+childs[c].name+';\n';
 		}
 
 		service.dtoString = dtoString;

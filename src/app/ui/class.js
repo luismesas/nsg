@@ -24,9 +24,9 @@ iris.ui(function(self) {
 		block += '\n';
 		block += '		// Gets all '+obj.names+' from database\n';
 		block += '		self.getAll'+obj.Names+' = function(p_cbk){\n';
-		block += '			'+obj.dbCol+'.find({}, {_id:0}).toArray(function(err, '+obj.acros+'){\n';
+		block += '			'+obj.dbCol+'.find({}).toArray(function(err, '+obj.acros+'){\n';
 		block += '				if(!err){\n';
-		block += '					f_cbk(err, '+obj.acros+');\n';
+		block += '					p_cbk(err, '+obj.acros+');\n';
 		block += '				}\n';
 		block += '			});\n';
 		block += '		};\n';
@@ -40,7 +40,7 @@ iris.ui(function(self) {
 		block += '					p_cbk(null, '+obj.acros+'[0]);\n';
 		block += '				}\n';
 		block += '			});\n';
-		block += '		}\n';
+		block += '		};\n';
 		block += '\n';
 		block += '		// Gets one '+obj.name+' searching for its id\n';
 		block += '		self.get'+obj.Name+'FromId = function('+obj.acro+'Id, p_cbk){\n';
@@ -70,7 +70,7 @@ iris.ui(function(self) {
 		block += '					p_cbk(null, '+obj.acro+');\n';
 		block += '				}\n';
 		block += '			});\n';
-		block += '		}\n';
+		block += '		};\n';
 		block += '\n';
 		block += '		// Removes '+obj.name+' from its id\n';
 		block += '		self.remove'+obj.Name+'FromId = function('+obj.acro+'Id, p_cbk){\n';
@@ -85,7 +85,7 @@ iris.ui(function(self) {
 		block += '					p_cbk(null, '+obj.acro+');\n';
 		block += '				}\n';
 		block += '			});\n';
-		block += '		}';
+		block += '		};';
 
 		return block;
 	}

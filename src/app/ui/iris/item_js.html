@@ -1,0 +1,36 @@
+<pre class="prettyprint lang-js"><xmp class="prettyprint lang-js">
+iris.ui(function(self) {
+	var _##acro## = null;
+
+	self.create = function() {
+		self.tmplMode(self.APPEND);
+
+		_##acro## = self.setting('##acro##');
+
+		self.tmpl(iris.path.ui.##acro##.item.html, _##acro##);
+		##acro##Changed(_##acro##);
+
+		self.get('row').click(rowSelected);
+		self.on(iris.evts.##acro##.changed, ##acro##Changed);
+		self.on(iris.evts.##acro##.selected, ##acro##Selected);
+	};
+
+	function rowSelected(){
+		self.notify(iris.evts.##acro##.selected, _##acro##);
+	}
+
+	function ##acro##Changed(##acro##){
+		if(_##acro##._id != ##acro##._id) return;
+
+##dtoString##	}
+
+	function ##acro##Selected(##acro##){
+		if(_##acro##._id == ##acro##._id){
+			self.get('row').addClass('info');
+		} else {
+			self.get('row').removeClass('info');
+		}
+	}
+
+}, iris.path.ui.##acro##.item.js);
+</xmp></pre>

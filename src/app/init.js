@@ -8,6 +8,7 @@ iris.path = {
 	ui : {
 		class : {js: 'ui/class.js', html: 'ui/class.html'},
 		paths : {js: 'ui/paths.js', html: 'ui/paths.html'},
+		init : {js: 'ui/init.js', html: 'ui/init.html'},
 		path : {
 			all: {js: 'ui/path/all.js', html: 'ui/path/all.html'},
 			put: {js: 'ui/path/put.js', html: 'ui/path/put.html'},
@@ -16,7 +17,17 @@ iris.path = {
 			delete: {js: 'ui/path/delete.js', html: 'ui/path/delete.html'}
 		},
 		iris : {
-			resource: {js: 'ui/iris/resource.js', html: 'ui/iris/resource.html'}
+			resource: {js: 'ui/iris/resource.js', html: 'ui/iris/resource.html'},
+			screen_html: {js: 'ui/iris/screen_html.js', html: 'ui/iris/screen_html.html'},
+			screen_js: {js: 'ui/iris/screen_js.js', html: 'ui/iris/screen_js.html'},
+			list_html: {js: 'ui/iris/list_html.js', html: 'ui/iris/list_html.html'},
+			list_js: {js: 'ui/iris/list_js.js', html: 'ui/iris/list_js.html'},
+			item_html: {js: 'ui/iris/item_html.js', html: 'ui/iris/item_html.html'},
+			item_js: {js: 'ui/iris/item_js.js', html: 'ui/iris/item_js.html'},
+			create_html: {js: 'ui/iris/create_html.js', html: 'ui/iris/create_html.html'},
+			create_js: {js: 'ui/iris/create_js.js', html: 'ui/iris/create_js.html'},
+			edit_html: {js: 'ui/iris/edit_html.js', html: 'ui/iris/edit_html.html'},
+			edit_js: {js: 'ui/iris/edit_js.js', html: 'ui/iris/edit_js.html'}
 		}
 	}
 };

@@ -1,0 +1,128 @@
+<pre class="prettyprint lang-js"><xmp class="prettyprint lang-js">iris.ui(function(self) {
+
+	var prevValues = {};
+	var _##acro## = null;
+
+	self.create = function() {
+		self.tmpl(iris.path.ui.##acro##.edit.html);
+
+		//Setup interactions
+##setupString##
+		self.get('btnDelete').click(deleteApp);
+
+		$(self.get('btnDelete')).tooltip();
+
+		self.on(iris.evts.##acro##.selected, ##acro##Selected);
+		self.on(iris.evts.##acro##.create, ##acro##Create);
+		self.on(iris.evts.screen.change, function(){self.get('root').hide();});
+	};
+
+	function setup(p_txt){
+		//Edit click
+		self.get('btn'+p_txt).click(function(){
+			edit(p_txt);
+		});
+
+		//Save click
+		self.get('save'+p_txt).click(function(){
+			save(p_txt);
+		});
+
+		//Cancel click
+		self.get('cancel'+p_txt).click(function(){
+			cancel(p_txt);
+		});
+	}
+
+	function show(p_txt){
+		self.get('lbl'+p_txt).hide();
+		self.get('cnt'+p_txt).show();
+		self.get('save'+p_txt).show();
+		self.get('refresh'+p_txt).hide();
+	}
+
+	function hide(p_txt){
+		self.get('lbl'+p_txt).show();
+		self.get('cnt'+p_txt).hide();
+		self.get('refresh'+p_txt).hide();
+	}
+
+	function edit(p_txt){
+		show(p_txt);
+		prevValues[p_txt] = self.get('txt'+p_txt).val();
+		self.get('txt'+p_txt).select();
+	}
+
+	function cancel(p_txt){
+		hide(p_txt);
+		self.get('txt'+p_txt).val(prevValues[p_txt]);
+	}
+
+	function save(p_txt){
+		self.get('lbl'+p_txt).html(self.get('txt'+p_txt).val());
+		self.get('refresh'+p_txt).show();
+		self.get('save'+p_txt).hide();
+		save##Acro##(p_txt);
+	}
+
+	// ---------------
+	// Save ##Name##
+	// ---------------
+
+	function save##Acro##(p_txt){
+##saveString##
+		iris.resource(iris.path.resource.##acro##).updateFromId(
+			_##acro##._id,
+			_##acro##,
+			function(){save##Acro##Ok(p_txt);},
+			function(){save##Acro##Ko(p_txt);}
+		);
+	}
+
+	function save##Acro##Ok(p_txt){
+		hide(p_txt);
+		self.notify(iris.evts.##acro##.changed, _##acro##);
+	}
+
+	function save##Acro##Ko(p_txt){
+		hide(p_txt);
+	}
+
+	function ##acro##Selected(##acro##){
+		_##acro## = ##acro##;
+##valuesString##
+
+		self.get('root').show();
+	}
+
+	function ##acro##Create(){
+		self.get('root').hide();
+	}
+
+	// ----------------
+	// Delete ##Name##
+	// ----------------
+	function deleteApp(){
+		self.get('btnDelete').addClass('icon-spin');
+		bootbox.confirm('Are you sure you want to delete the app "'+ _##acro##.name +'"?', function(p_confirm){
+			if(p_confirm){
+				iris.resource(iris.path.resource.app).remove(_##acro##._id, deleteAppOk, deleteAppKo);
+			} else {
+				self.get('btnDelete').removeClass('icon-spin');
+			}
+		});
+	}
+
+	function deleteAppOk(){
+		self.notify(iris.evts.##acro##.deleted);
+		self.get('btnDelete').removeClass('icon-spin');
+		self.get('root').hide();
+	}
+
+	function deleteAppKo(){
+		self.get('btnDelete').removeClass('icon-spin');
+	}
+
+}, iris.path.ui.##acro##.edit.js);
+</xmp>
+</pre>

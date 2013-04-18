@@ -1,0 +1,71 @@
+<pre class="prettyprint lang-js"><xmp class="prettyprint lang-js">
+iris.ui(function(self) {
+
+	self.create = function() {
+		self.tmpl(iris.path.ui.##acro##.list.html);
+		upgradeDatatable();
+
+		self.on(iris.evts.##acro##.created, refreshItems);
+		self.on(iris.evts.##acro##.deleted, refreshItems);
+	};
+
+	self.awake = function() {
+		refreshItems();
+	};
+
+	function refreshItems(){
+		iris.resource(iris.path.resource.##acro##).getAll(drawItems);
+		self.get('iconSubtitle').addClass('icon-spin');
+	}
+
+	function drawItems(p_items){
+		var dt = $(self.get('dt##Acro##List')).dataTable();
+		dt.fnDestroy();
+
+		self.destroyUIs('container');
+		var u, U = p_items.length;
+		for(u=0;u<U;u++){
+			self.ui('container', iris.path.ui.##acro##.item.js, {##acro##: p_items[u]});
+		}
+		self.get('lblCount').html(U);
+
+		upgradeDatatable();
+
+		self.get('iconSubtitle').removeClass('icon-spin');
+	}
+
+	function upgradeDatatable(){
+		$(self.get('dt##Acro##List')).dataTable({
+			bJQueryUI: true,
+			sPaginationType: "two_button", // "full_numbers"
+			sDom: '<""l>t<"F"fp>',
+			aLengthMenu: [ 10, 25 ],
+			iDisplayLength : 10,
+			bDestroy : true,
+			bAutoWidth : false,
+			fnDrawCallback : function(oSettings){
+			}
+		});
+
+		$('input[type=checkbox],input[type=radio],input[type=file]').uniform();
+
+		$('select').select2();
+
+		$("span.icon input:checkbox, th input:checkbox").click(function() {
+			var checkedStatus = this.checked;
+			var checkbox = $(this).parents('.widget-box').find('tr td:first-child input:checkbox');
+			checkbox.each(function() {
+				this.checked = checkedStatus;
+				if (checkedStatus == this.checked) {
+					$(this).closest('.checker > span').removeClass('checked');
+				}
+				if (this.checked) {
+					$(this).closest('.checker > span').addClass('checked');
+				}
+			});
+		});
+	}
+
+}, iris.path.ui.##acro##.list.js);
+
+</xmp></pre>

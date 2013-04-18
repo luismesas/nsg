@@ -1,0 +1,29 @@
+<pre class="prettyprint lang-js"><xmp class="prettyprint lang-js">
+iris.screen(function(self) {
+
+	self.create = function() {
+		self.tmpl(iris.path.screens.##acro##.html);
+
+		self.ui("##acros##_list", iris.path.ui.##acro##.list.js);
+		self.ui("##acros##_edit", iris.path.ui.##acro##.edit.js);
+		self.ui("##acros##_create", iris.path.ui.##acro##.create.js);
+
+		self.get('btnCreate').click(##acro##Create);
+
+		// repeat for each child
+		// self.ui("log_list", iris.path.ui.log.list.js);
+		// self.ui("log_tags", iris.path.ui.log.tags.js);
+		// self.on(iris.evts.##acros##.selected, function(){self.get('logsTitle').show();});
+		// self.on(iris.evts.screen.change, function(){self.get('logsTitle').hide();});
+	};
+
+	self.awake = function(){
+		self.notify(iris.evts.screen.change, iris.path.screens.##acro##);
+	};
+
+	function ##acro##Create(){
+		self.notify(iris.evts.##acro##.create);
+	}
+
+}, iris.path.screens.##acro##.js);
+</xmp></pre>
