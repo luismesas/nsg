@@ -8,10 +8,10 @@ iris.ui(function(self) {
 		var dtoString = '';
 
 		//properties
-		var keys = service.props;
-		var k,K=keys.length;
-		for(k=0;k<K;k++){
-			var key = keys[k];
+		var props = service.props;
+		var p,P=props.length;
+		for(p=0;p<P;p++){
+			var key = props[p].name;
 			if(key === '_id') key = 'id';
 			var Key = key.substr(0,1).toUpperCase()+key.substr(1);
 

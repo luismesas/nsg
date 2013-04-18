@@ -13,7 +13,14 @@ iris.screen(function(self) {
 
 	var service = {};
 
+	var defaultProp = {
+		readonly : false,
+		length : 10,
+		auto : "none"
+	};
+
 	function generateDto(){
+		self.get('alertContainer').hide();
 		var dtoString = self.get('txtDto').val();
 		if(dtoString !== '') {
 			try{
@@ -21,6 +28,10 @@ iris.screen(function(self) {
 				service.props = [];
 				service.childs = [];
 				$.map(service.dto, function(value,key){
+					var prop = {
+						name : key
+					};
+
 					if (value instanceof Array){
 						var child = {};
 						child.name = key;
@@ -31,14 +42,17 @@ iris.screen(function(self) {
 						child.acros = child.acro + 's';
 						service.childs.push(child);
 					} else {
-						service.props.push(key);
+						$.extend(prop, defaultProp, value);
+						console.log(key, prop);
+						service.props.push(prop);
 					}
 					return;
 				});
 
 				self.get('txtDto').val(JSON.stringify(service.dto, null, 4));
 			} catch (err) {
-				console.log(err);
+				self.get('alertText').html(err.message);
+				self.get('alertContainer').show();
 			}
 		}
 	}

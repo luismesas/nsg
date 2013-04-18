@@ -12,8 +12,10 @@ iris.ui(function(self) {
 		var keys = service.props;
 		var k,K=keys.length;
 		for(k=0;k<K;k++){
-			//<td class="center" data-id="lblName">##name##</td>
-			var key = keys[k];
+			var prop = keys[k];
+			if(prop.readonly) continue;
+
+			var key = keys[k].name;
 			if(key === '_id') continue;
 			var Key = key.substr(0,1).toUpperCase()+key.substr(1);
 			//name : self.get('txtName').val(),

@@ -13,14 +13,15 @@ iris.ui(function(self) {
 		var keys = service.props;
 		var k,K=keys.length;
 		for(k=0;k<K;k++){
-			//<td class="center" data-id="lblName">##name##</td>
-			var key = keys[k];
+			var prop = keys[k];
+
+			var key = prop.name;
 			if(key === '_id') continue;
 			var Key = key.substr(0,1).toUpperCase()+key.substr(1);
-			setupString += '		setup(\''+Key+'\');\n';
+			if(!prop.readonly) setupString += '		setup(\''+Key+'\');\n';
 			valuesString += '		self.get(\'lbl'+Key+'\').html('+service.acro+'.'+key+');\n';
 			valuesString += '		self.get(\'txt'+Key+'\').val('+service.acro+'.'+key+');\n';
-			valuesString += '		self.get(\'btn'+Key+'\').show();\n';
+			if(!prop.readonly) valuesString += '		self.get(\'btn'+Key+'\').show();\n';
 			saveString += '		_'+service.acro+'.'+key+' = self.get(\'txt'+Key+'\').val();\n';
 		}
 

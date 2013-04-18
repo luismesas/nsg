@@ -12,7 +12,7 @@ iris.ui(function(self) {
 		var k,K=keys.length;
 		for(k=0;k<K;k++){
 			//<td class="center" data-id="lblName">##name##</td>
-			var key = keys[k];
+			var key = keys[k].name;
 			var Key = key.substr(0,1).toUpperCase()+key.substr(1);
 			dtoString += '	<td class="center" data-id="lbl'+Key+'">##'+key+'##</td>\n';
 		}

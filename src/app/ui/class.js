@@ -33,6 +33,15 @@ iris.ui(function(self) {
 		block += '\n';
 		block += '		// Creates a new '+obj.name+' and returns it\n';
 		block += '		self.create'+obj.Name+' = function('+obj.acro+', p_cbk){\n';
+
+		//auto generators
+		for(var p=0;p<obj.props.length;p++){
+			var prop = obj.props[p];
+			if(prop.auto == 'random'){
+				block += '			fdr.'+prop.name+' = _createToken('+prop.length+');\n';
+			}
+		}
+
 		block += '			'+obj.dbCol+'.insert('+obj.acro+', {w:1}, function(err, '+obj.acros+'){\n';
 		block += '				if(err || '+obj.acros+'.length === 0){\n';
 		block += '					p_cbk(err, null);\n';

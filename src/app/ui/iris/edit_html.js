@@ -11,13 +11,21 @@ iris.ui(function(self) {
 		var keys = service.props;
 		var k,K=keys.length;
 		for(k=0;k<K;k++){
-			//<td class="center" data-id="lblName">##name##</td>
-			var key = keys[k];
+			var prop = keys[k];
+
+			var key = prop.name;
 			if(key === '_id') continue;
 			var Key = key.substr(0,1).toUpperCase()+key.substr(1);
 
+			var icon = 'icon-edit';
+			if(prop.auto == 'random'){
+				icon = 'icon-refresh';
+			}
+
 			dtoString +='			<p>\n';
-			dtoString +='				<small>'+Key+'</small>&nbsp;<i class="icon-edit hand" data-id="btn'+Key+'" style="display:none;"></i><br/>\n';
+			dtoString +='				<small>'+Key+'</small>';
+			if(!prop.readonly) dtoString +='&nbsp;<i class="'+icon+' hand" data-id="btn'+Key+'" style="display:none;"></i>';
+			dtoString +='<br/>\n';
 			dtoString +='				<strong data-id="lbl'+Key+'" style="word-wrap:break-word;">--</strong>\n';
 			dtoString +='				\n';
 			dtoString +='				<div data-id="cnt'+Key+'" class="input-append" style="display:none;">\n';

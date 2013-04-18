@@ -1,12 +1,13 @@
 <pre class="prettyprint lang-js">
-var commons = require('../../lib/commons'),
-	mongodb = commons.mongodb,
-	async	= commons.async,
-	ObjectID = commons.mongodb.ObjectID,
-	hero	= commons.hero,
-	app		= hero.app,
-	express	= commons.express,
-	pastry	= commons.pastry;
+var commons		= require('../../lib/commons'),
+	mongodb		= commons.mongodb,
+	async		= commons.async,
+	ObjectID	= commons.mongodb.ObjectID,
+	hero		= commons.hero,
+	app			= hero.app,
+	express		= commons.express,
+	crypto		= commons.crypto,
+	pastry		= commons.pastry;
 
 module.exports = hero.worker (
 	function(self){
@@ -62,6 +63,18 @@ module.exports = hero.worker (
 				}
 			);
 		};
+
+		// Random generator
+		function _createToken(len){
+			var tkn = crypto
+				.randomBytes(Math.ceil(len * 3 / 4))
+				.toString('base64')
+				.slice(0, len)
+				.replace(/\//g, '-')
+				.replace(/\+/g, '_')
+			;
+			return tkn;
+		}
 
 ##fn##
 	}
