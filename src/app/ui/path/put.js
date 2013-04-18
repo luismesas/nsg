@@ -12,8 +12,9 @@ iris.ui(function(self) {
 		var keys = service.props;
 		var k,K=keys.length;
 		for(k=0;k<K;k++){
-			if(keys[k] == '_id') continue;
-			dtoString += '	if(req.body.'+keys[k]+' !== undefined) new'+service.Acro+'.'+keys[k]+' = req.body.'+keys[k]+';\n';
+			var key = keys[k].name;
+			if(key == '_id') continue;
+			dtoString += '	if(req.body.'+key+' !== undefined) new'+service.Acro+'.'+key+' = req.body.'+key+';\n';
 		}
 
 		//child arrays
