@@ -8,13 +8,13 @@
 					<div class="control-group">
 						<label class="control-label">Name</label>
 						<div class="controls">
-							<input type="text" data-id="txtName" value="feeder"/>
+							<input type="text" data-id="txtName" value="user"/>
 						</div>
 					</div>
 					<div class="control-group">
 						<label class="control-label">Acronym</label>
 						<div class="controls">
-							<input type="text" data-id="txtAcronym" value="fdr"/>
+							<input type="text" data-id="txtAcronym" value="usr"/>
 						</div>
 					</div>
 				</form>
@@ -24,20 +24,26 @@
 				<form class="form-horizontal">
 					<legend>DTO</legend>
 					<textarea rows="8" class="span12" data-id="txtDto">{
-	"_id"		: "",
-	"name"		: "",
-	"host"		: "",
-	"clientId"	: {"auto":"random","length":16,"readonly":true},
-	"secretKey"	: {"auto":"random","length":32},
-	"kind"		: [
-		{
-			"_id"	: "",
-			"name"	: "",
-			"lbl"	: ""
-		}
-	]
+    "_id": "",
+    "email": "",
+    "password": {
+        "auto": "random",
+        "length": 8
+    },
+    "created":{
+    	"auto": "date",
+    	"readonly": true
+	},
+    "admin": true
 }</textarea>
 				</form>
+				<a class="hand" data-id="btnHelp">help</a><div data-id="help" style="display:none"><pre class="prettyprint lang-js">{
+    "key": {
+        "auto": "(none)|random|date",
+        "length": 16,
+        "readonly": (false)|true
+    }
+}</pre></div>
 				<div class="alert alert-error" style="display:none;" data-id="alertContainer">
 					<strong>Error!</strong><div data-id="alertText">Best check yo self, you're not looking too good.</div>
 				</div>

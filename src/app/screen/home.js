@@ -3,13 +3,21 @@ iris.screen(function(self) {
 		self.tmpl(iris.path.screen.home.html);
 
 		self.get('btnGenerate').click(onBtnGenerateClick);
+		self.get('btnHelp').click(onBtnHelp);
 
 		generateDto();
+		prettyPrint();
 	};
 
 	self.awake = function(){
 		self.notify(iris.evts.screen.change, iris.path.screen.home);
 	};
+
+	function onBtnHelp(e){
+		e.preventDefault();
+		self.get('help').show();
+		self.get('btnHelp').hide();
+	}
 
 	var service = {};
 

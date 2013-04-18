@@ -38,8 +38,13 @@ iris.ui(function(self) {
 		//auto generators
 		for(p=0;p<obj.props.length;p++){
 			prop = obj.props[p];
-			if(prop.auto == 'random'){
-				block += '			fdr.'+prop.name+' = _createToken('+prop.length+');\n';
+			switch(prop.auto){
+				case 'random':
+					block += '			fdr.'+prop.name+' = _createToken('+prop.length+');\n';
+					break;
+				case 'date':
+					block += '			fdr.'+prop.name+' = (new Date()).getTime();\n';
+					break;
 			}
 		}
 
