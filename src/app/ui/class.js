@@ -40,10 +40,10 @@ iris.ui(function(self) {
 			prop = obj.props[p];
 			switch(prop.auto){
 				case 'random':
-					block += '			fdr.'+prop.name+' = _createToken('+prop.length+');\n';
+					block += '			'+obj.acro+'.'+prop.name+' = _createToken('+prop.length+');\n';
 					break;
 				case 'date':
-					block += '			fdr.'+prop.name+' = (new Date()).getTime();\n';
+					block += '			'+obj.acro+'.'+prop.name+' = (new Date()).getTime();\n';
 					break;
 			}
 		}
