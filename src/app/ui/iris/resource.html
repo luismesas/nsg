@@ -25,14 +25,7 @@ iris.resource(
 		self.generate = function(p_##acro##Id, p_field, f_ok, f_error){
 			return self.post('/##acro##/' + p_##acro##Id + '/generate/' + p_field, {}, f_ok, f_error);
 		};
-
-		self.signin = function(p_usr, p_pwd, f_ok, f_error){
-			return self.post('/signin', {u: p_usr,p: p_pwd}, function(){
-				iris.notify(iris.evts.usr.signing);
-				f_ok();
-			}, f_error);
-		};
-
+##loginServices##
 	},
 	iris.path.resource.##acro##
 );

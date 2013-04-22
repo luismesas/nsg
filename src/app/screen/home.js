@@ -104,6 +104,7 @@ iris.screen(function(self) {
 		generateTab('path-generate', 'app/path/'+service.name+'_'+service.name+'id_generate_field_post.js', iris.path.ui.path.generate.js);
 		if(service.login){
 			generateTab('path-signin', 'app/path/signin_post.js', iris.path.ui.path.signin.js);
+			generateTab('path-signout', 'app/path/signout_post.js', iris.path.ui.path.signout.js);
 		}
 
 		// Iris files

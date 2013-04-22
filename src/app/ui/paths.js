@@ -7,7 +7,8 @@ iris.ui(function(self) {
 
 		var loginPaths = '';
 		if(service.login){
-			loginPaths += '	{ method : \'POST\', path : \'/signin\', handler : require(\'./path/signin_post\') },';
+			loginPaths += '	{ method : \'POST\', path : \'/signin\', handler : require(\'./path/signin_post\') },\n';
+			loginPaths += '	{ method : \'POST\', path : \'/signout\', handler : require(\'./path/signout_post\') },';
 		}
 		service.loginPaths = loginPaths;
 

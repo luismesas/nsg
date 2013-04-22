@@ -15,7 +15,8 @@ iris.path = {
 			post: {js: 'ui/path/post.js', html: 'ui/path/post.html'},
 			del: {js: 'ui/path/del.js', html: 'ui/path/del.html'},
 			generate: {js: 'ui/path/generate.js', html: 'ui/path/generate.html'},
-			signin: {js: 'ui/path/signin.js', html: 'ui/path/signin.html'}
+			signin: {js: 'ui/path/signin.js', html: 'ui/path/signin.html'},
+			signout: {js: 'ui/path/signout.js', html: 'ui/path/signout.html'}
 		},
 		iris : {
 			init : {js: 'ui/iris/init.js', html: 'ui/iris/init.html'},

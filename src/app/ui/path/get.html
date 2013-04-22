@@ -6,7 +6,11 @@ function handler(req, res){
 
 	// ##Name## 'me'
 	if(##acro##id == 'me'){
-		##acro##id = req.pastry.data.uid;
+		if(req.pastry.data.uid === undefined){
+			res.send(401, 'Unauthorized');
+			return;
+		}
+		else ##acro##id = req.pastry.data.uid;
 	}
 
 	##name##.##fn##(##acro##id, function(err, ##acro##){
