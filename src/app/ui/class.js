@@ -15,99 +15,111 @@ iris.ui(function(self) {
 	self.awake = function(){
 	};
 
-	function generateFunctionsBlock(obj){
+	function generateFunctionsBlock(service){
 		var p,prop;
 		var block = '';
 
 		block += '		// ----------------\n';
-		block += '		// '+obj.Name+'\n';
+		block += '		// '+service.Name+'\n';
 		block += '		// ----------------\n';
 		block += '\n';
-		block += '		// Gets all '+obj.names+' from database\n';
-		block += '		self.getAll'+obj.Names+' = function(p_cbk){\n';
-		block += '			'+obj.dbCol+'.find({}).toArray(function(err, '+obj.acros+'){\n';
+		block += '		// Gets all '+service.names+' from database\n';
+		block += '		self.getAll'+service.Names+' = function(p_cbk){\n';
+		block += '			'+service.dbCol+'.find({}).toArray(function(err, '+service.acros+'){\n';
 		block += '				if(!err){\n';
-		block += '					p_cbk(err, '+obj.acros+');\n';
+		block += '					p_cbk(err, '+service.acros+');\n';
 		block += '				}\n';
 		block += '			});\n';
 		block += '		};\n';
 		block += '\n';
-		block += '		// Creates a new '+obj.name+' and returns it\n';
-		block += '		self.create'+obj.Name+' = function('+obj.acro+', p_cbk){\n';
+		block += '		// Creates a new '+service.name+' and returns it\n';
+		block += '		self.create'+service.Name+' = function('+service.acro+', p_cbk){\n';
 
 		//auto generators
-		for(p=0;p<obj.props.length;p++){
-			prop = obj.props[p];
+		for(p=0;p<service.props.length;p++){
+			prop = service.props[p];
 			switch(prop.auto){
 				case 'random':
-					block += '			'+obj.acro+'.'+prop.name+' = _createToken('+prop.length+');\n';
+					block += '			'+service.acro+'.'+prop.name+' = _createToken('+prop.length+');\n';
 					break;
 				case 'date':
-					block += '			'+obj.acro+'.'+prop.name+' = (new Date()).getTime();\n';
+					block += '			'+service.acro+'.'+prop.name+' = (new Date()).getTime();\n';
 					break;
 			}
 		}
 
-		block += '			'+obj.dbCol+'.insert('+obj.acro+', {w:1}, function(err, '+obj.acros+'){\n';
-		block += '				if(err || '+obj.acros+'.length === 0){\n';
+		block += '			'+service.dbCol+'.insert('+service.acro+', {w:1}, function(err, '+service.acros+'){\n';
+		block += '				if(err || '+service.acros+'.length === 0){\n';
 		block += '					p_cbk(err, null);\n';
 		block += '				} else {\n';
-		block += '					p_cbk(null, '+obj.acros+'[0]);\n';
+		block += '					p_cbk(null, '+service.acros+'[0]);\n';
 		block += '				}\n';
 		block += '			});\n';
 		block += '		};\n';
 		block += '\n';
-		block += '		// Gets one '+obj.name+' searching for its id\n';
-		block += '		self.get'+obj.Name+'FromId = function('+obj.acro+'Id, p_cbk){\n';
+		block += '		// Gets one '+service.name+' searching for its id\n';
+		block += '		self.get'+service.Name+'FromId = function('+service.acro+'Id, p_cbk){\n';
 		block += '			var find = {\n';
-		block += '				_id: ObjectID(String('+obj.acro+'Id))\n';
+		block += '				_id: ObjectID(String('+service.acro+'Id))\n';
 		block += '			};\n';
 		block += '\n';
-		block += '			'+obj.dbCol+'.findOne(find, {}, function(err, '+obj.acro+'){\n';
-		block += '				if(err || '+obj.acro+' === null){\n';
+		block += '			'+service.dbCol+'.findOne(find, {}, function(err, '+service.acro+'){\n';
+		block += '				if(err || '+service.acro+' === null){\n';
 		block += '					p_cbk(err, null);\n';
 		block += '				} else {\n';
-		block += '					p_cbk(null, '+obj.acro+');\n';
+		block += '					p_cbk(null, '+service.acro+');\n';
 		block += '				}\n';
 		block += '			});\n';
 		block += '		};\n';
-		block += '\n';
-		block += '		// Updates '+obj.names+' that matchs id\n';
-		block += '		self.update'+obj.Name+'FromId = function(p_'+obj.acro+'Id, p_set, p_cbk){\n';
+
+		//login services
+		if(service.login){
+			block += '\n		// Gets one '+service.name+' searching for its user/pwd\n';
+			block += '		self.getFromUserPass = function(p_usr, p_pwd, f_cbk) {\n';
+			block += '			'+service.dbCol+'.findOne(\n';
+			block += '				{ '+service.userProp.name+' : p_usr, '+service.passProp.name+' : p_pwd },\n';
+			block += '				{ '+service.passProp.name+':0 },\n';
+			block += '				f_cbk\n';
+			block += '			);\n';
+			block += '		}\n';
+		}
+
+		block += '\n		// Updates '+service.names+' that matchs id\n';
+		block += '		self.update'+service.Name+'FromId = function(p_'+service.acro+'Id, p_set, p_cbk){\n';
 		//read only
-		for(p=0;p<obj.props.length;p++){
-			prop = obj.props[p];
+		for(p=0;p<service.props.length;p++){
+			prop = service.props[p];
 			if(prop.readonly){
 				block += '			delete p_set.'+prop.name+';\n';
 			}
 		}
 		block += '			var find = {\n';
-		block += '				_id: ObjectID(String(p_'+obj.acro+'Id))\n';
+		block += '				_id: ObjectID(String(p_'+service.acro+'Id))\n';
 		block += '			};\n';
 		block += '			var set = {\n';
 		block += '				$set : p_set\n';
 		block += '			};\n';
 		block += '\n';
-		block += '			'+obj.dbCol+'.findAndModify(find, [], set, {\'new\' : true}, function(err,'+obj.acro+'){\n';
-		block += '				if(err || '+obj.acro+' === null){\n';
+		block += '			'+service.dbCol+'.findAndModify(find, [], set, {\'new\' : true}, function(err,'+service.acro+'){\n';
+		block += '				if(err || '+service.acro+' === null){\n';
 		block += '					p_cbk(err, null);\n';
 		block += '				} else {\n';
-		block += '					p_cbk(null, '+obj.acro+');\n';
+		block += '					p_cbk(null, '+service.acro+');\n';
 		block += '				}\n';
 		block += '			});\n';
 		block += '		};\n';
 		block += '\n';
-		block += '		// Removes '+obj.name+' from its id\n';
-		block += '		self.remove'+obj.Name+'FromId = function('+obj.acro+'Id, p_cbk){\n';
+		block += '		// Removes '+service.name+' from its id\n';
+		block += '		self.remove'+service.Name+'FromId = function('+service.acro+'Id, p_cbk){\n';
 		block += '			var find = {\n';
-		block += '				_id: ObjectID(String('+obj.acro+'Id))\n';
+		block += '				_id: ObjectID(String('+service.acro+'Id))\n';
 		block += '			};\n';
 		block += '\n';
-		block += '			'+obj.dbCol+'.remove(find, function(err,'+obj.acro+'){\n';
-		block += '				if(err || '+obj.acro+' === null){\n';
+		block += '			'+service.dbCol+'.remove(find, function(err,'+service.acro+'){\n';
+		block += '				if(err || '+service.acro+' === null){\n';
 		block += '					p_cbk(err, null);\n';
 		block += '				} else {\n';
-		block += '					p_cbk(null, '+obj.acro+');\n';
+		block += '					p_cbk(null, '+service.acro+');\n';
 		block += '				}\n';
 		block += '			});\n';
 		block += '		};\n';
@@ -115,16 +127,16 @@ iris.ui(function(self) {
 
 		//auto generators
 		block += '		var fieldsLength = {};\n';
-		for(p=0;p<obj.props.length;p++){
-			prop = obj.props[p];
+		for(p=0;p<service.props.length;p++){
+			prop = service.props[p];
 			if(prop.auto == 'random'){
 				block += '		fieldsLength[\''+prop.name+'\'] = '+prop.length+';\n';
 			}
 		}
-		block += '		// Generates a new value for field for given '+obj.name+'\n';
-		block += '		self.generate = function ('+obj.acro+'Id, field, f_callback){\n';
+		block += '		// Generates a new value for field for given '+service.name+'\n';
+		block += '		self.generate = function ('+service.acro+'Id, field, f_callback){\n';
 		block += '			var find = {\n';
-		block += '				_id : new ObjectID(String('+obj.acro+'Id))\n';
+		block += '				_id : new ObjectID(String('+service.acro+'Id))\n';
 		block += '			};\n';
 		block += '\n';
 		block += '			var jSet = {};\n';
@@ -133,9 +145,8 @@ iris.ui(function(self) {
 		block += '				$set : jSet\n';
 		block += '			};\n';
 		block += '\n';
-		block += '			'+obj.dbCol+'.findAndModify(find,[],set,{\'new\' : true},f_callback);\n';
+		block += '			'+service.dbCol+'.findAndModify(find,[],set,{\'new\' : true},f_callback);\n';
 		block += '		};\n';
-
 
 		return block;
 	}

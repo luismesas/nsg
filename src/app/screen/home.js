@@ -24,7 +24,9 @@ iris.screen(function(self) {
 	var defaultProp = {
 		readonly : false,
 		length : 16,
-		auto : "none"
+		auto : "none",
+		loginuser: false,
+		loginpass: false
 	};
 
 	function generateDto(){
@@ -52,6 +54,13 @@ iris.screen(function(self) {
 					} else {
 						$.extend(prop, defaultProp, value);
 						if(prop.name == '_id') prop.readonly = true;
+
+						prop.Name = prop.name.substr(0,1).toUpperCase() + prop.name.substr(1);
+
+						if(prop.loginuser) service.userProp = prop;
+						if(prop.loginpass) service.passProp = prop;
+						service.login = service.login || prop.loginuser || prop.loginpass;
+
 						console.log(key, prop);
 						service.props.push(prop);
 					}
@@ -85,7 +94,7 @@ iris.screen(function(self) {
 		service.acros = service.acro + 's';
 
 		// nodejs files
-		generateTab('class', 'app/'+service.name + '.js', iris.path.ui.class.js);
+		generateTab('class', 'app/'+service.name+'.js', iris.path.ui.class.js);
 		generateTab('paths', 'app/paths.js', iris.path.ui.paths.js);
 		generateTab('path-all', 'app/path/'+service.name+'_get.js', iris.path.ui.path.all.js);
 		generateTab('path-put', 'app/path/'+service.name+'_put.js', iris.path.ui.path.put.js);
@@ -93,34 +102,41 @@ iris.screen(function(self) {
 		generateTab('path-post', 'app/path/'+service.name+'_'+service.name+'id_post.js', iris.path.ui.path.post.js);
 		generateTab('path-del', 'app/path/'+service.name+'_'+service.name+'id_del.js', iris.path.ui.path.del.js);
 		generateTab('path-generate', 'app/path/'+service.name+'_'+service.name+'id_generate_field_post.js', iris.path.ui.path.generate.js);
+		if(service.login){
+			generateTab('path-signin', 'app/path/signin_post.js', iris.path.ui.path.signin.js);
+		}
 
 		// Iris files
 		generateTab('init', 'www/app/init.js', iris.path.ui.iris.init.js);
 		generateTab('lang', 'www/app/lang/en-us.js', iris.path.ui.iris.lang.js);
-		generateTab('iris-resource', 'www/app/resource/'+service.name + '.js', iris.path.ui.iris.resource.js);
+		generateTab('iris-resource', 'www/app/resource/'+service.name+'.js', iris.path.ui.iris.resource.js);
 		// Iris - Screen
-		generateTab('iris-screen-html', 'www/app/screen/'+service.name + '.html', iris.path.ui.iris.screen_html.js);
-		generateTab('iris-screen-js', 'www/app/screen/'+service.name + '.js', iris.path.ui.iris.screen_js.js);
+		generateTab('iris-screen-html', 'www/app/screen/'+service.name+'.html', iris.path.ui.iris.screen_html.js);
+		generateTab('iris-screen-js', 'www/app/screen/'+service.name+'.js', iris.path.ui.iris.screen_js.js);
 		// Iris - UIs
-		generateTab('iris-ui-list-html', 'www/app/ui/'+service.name + '/list.html', iris.path.ui.iris.list_html.js);
-		generateTab('iris-ui-list-js', 'www/app/ui/'+service.name + '/list.js', iris.path.ui.iris.list_js.js);
-		generateTab('iris-ui-item-html', 'www/app/ui/'+service.name + '/item.html', iris.path.ui.iris.item_html.js);
-		generateTab('iris-ui-item-js', 'www/app/ui/'+service.name + '/item.js', iris.path.ui.iris.item_js.js);
-		generateTab('iris-ui-create-html', 'www/app/ui/'+service.name + '/create.html', iris.path.ui.iris.create_html.js);
-		generateTab('iris-ui-create-js', 'www/app/ui/'+service.name + '/create.js', iris.path.ui.iris.create_js.js);
-		generateTab('iris-ui-edit-html', 'www/app/ui/'+service.name + '/edit.html', iris.path.ui.iris.edit_html.js);
-		generateTab('iris-ui-edit-js', 'www/app/ui/'+service.name + '/edit.js', iris.path.ui.iris.edit_js.js);
+		generateTab('iris-ui-list-html', 'www/app/ui/'+service.name+'/list.html', iris.path.ui.iris.list_html.js);
+		generateTab('iris-ui-list-js', 'www/app/ui/'+service.name+'/list.js', iris.path.ui.iris.list_js.js);
+		generateTab('iris-ui-item-html', 'www/app/ui/'+service.name+'/item.html', iris.path.ui.iris.item_html.js);
+		generateTab('iris-ui-item-js', 'www/app/ui/'+service.name+'/item.js', iris.path.ui.iris.item_js.js);
+		generateTab('iris-ui-create-html', 'www/app/ui/'+service.name+'/create.html', iris.path.ui.iris.create_html.js);
+		generateTab('iris-ui-create-js', 'www/app/ui/'+service.name+'/create.js', iris.path.ui.iris.create_js.js);
+		generateTab('iris-ui-edit-html', 'www/app/ui/'+service.name+'/edit.html', iris.path.ui.iris.edit_html.js);
+		generateTab('iris-ui-edit-js', 'www/app/ui/'+service.name+'/edit.js', iris.path.ui.iris.edit_js.js);
+		if(service.login){
+			generateTab('iris-screen-signin-html', 'www/app/screen/signin.html', iris.path.ui.iris.login.signin_html.js);
+			generateTab('iris-screen-signin-js', 'www/app/screen/signin.js', iris.path.ui.iris.login.signin_js.js);
+		}
 
 		// Show tabs
 		self.get('tabs').show();
 	}
 
-	function generateTab(dataId, title, ui, param){
+	function generateTab(dataId, filePath, ui, param){
 		try{
 			self.get('tab-'+dataId);
 			self.destroyUIs('tab-'+dataId);
 		} catch(err){
-			self.get('tabs-titles').append('<li><a href="#tab-'+dataId+'" data-toggle="tab">'+title+'</a></li>');
+			self.get('tabs-titles').append('<li><a href="#tab-'+dataId+'" data-toggle="tab">'+filePath+'</a></li>');
 
 			var content = '';
 			content += '<div id="tab-'+dataId+'" class="tab-pane">';
@@ -131,12 +147,12 @@ iris.screen(function(self) {
 
 		}
 		var code = self.ui('tab-'+dataId, ui, {service:service});
-		// self.get('icon'+dataId+'Download').click(function(e){btnDownload(dataId,title,code,e);});
+		// self.get('icon'+dataId+'Download').click(function(e){btnDownload(dataId,filePath,code,e);});
 	}
 
-	function btnDownload(dataId,title,code,e){
+	function btnDownload(dataId,filePath,code,e){
 		e.preventDefault();
-		var filename = title.match(/([^/]*)$/g)[0];
+		var filename = filePath.match(/([^/]*)$/g)[0];
 		var blob = new Blob([self.get('tab-'+dataId).html()], {type: "text/plain;charset=utf-8"});
 		saveAs(blob, filename);
 	}

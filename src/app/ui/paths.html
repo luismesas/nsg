@@ -1,34 +1,11 @@
 <pre class="prettyprint lang-js">
 exports.paths = [
-	{
-		method : 'GET',
-		path : '/##acro##',
-		handler : require('./path/##name##_get')
-	},
-	{
-		method : 'PUT',
-		path : '/##acro##',
-		handler : require('./path/##name##_put')
-	},
-	{
-		method : 'GET',
-		path : '/##acro##/:##acro##id',
-		handler : require('./path/##name##_##name##id_get')
-	},
-	{
-		method : 'POST',
-		path : '/##acro##/:##acro##id',
-		handler : require('./path/##name##_##name##id_post')
-	},
-	{
-		method : 'DELETE',
-		path : '/##acro##/:##acro##id',
-		handler : require('./path/##name##_##name##id_del')
-	},
-	{
-		method : 'POST',
-		path : '/##acro##/:##acro##id/generate/:field',
-		handler : require('./path/##name##_##name##id_generate_field_post')
-	}
+##loginPaths##
+	{ method : 'GET', path : '/##acro##', handler : require('./path/##name##_get') },
+	{ method : 'PUT', path : '/##acro##', handler : require('./path/##name##_put') },
+	{ method : 'GET', path : '/##acro##/:##acro##id', handler : require('./path/##name##_##name##id_get') },
+	{ method : 'POST', path : '/##acro##/:##acro##id', handler : require('./path/##name##_##name##id_post') },
+	{ method : 'DELETE', path : '/##acro##/:##acro##id', handler : require('./path/##name##_##name##id_del') },
+	{ method : 'POST', path : '/##acro##/:##acro##id/generate/:field', handler : require('./path/##name##_##name##id_generate_field_post')}
 ]
 </pre>

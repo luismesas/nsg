@@ -3,9 +3,15 @@ iris.ui(function(self) {
 	self.create = function() {
 		self.tmplMode(self.APPEND);
 
-		var sintax = self.setting('service');
+		var service = self.setting('service');
 
-		self.tmpl(iris.path.ui.paths.html, sintax);
+		var loginPaths = '';
+		if(service.login){
+			loginPaths += '	{ method : \'POST\', path : \'/signin\', handler : require(\'./path/signin_post\') },';
+		}
+		service.loginPaths = loginPaths;
+
+		self.tmpl(iris.path.ui.paths.html, service);
 		prettyPrint();
 	};
 

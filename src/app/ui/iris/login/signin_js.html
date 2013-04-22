@@ -1,0 +1,41 @@
+<pre class="prettyprint lang-js"><xmp class="prettyprint lang-js">iris.screen(function(self) {
+
+	self.create = function() {
+		self.tmpl(iris.path.screens.signin.html);
+
+		self.get('btnSend').click(onBtnSend);
+	};
+
+	self.awake = function(){
+		self.notify('SCREEN_CHANGE', iris.path.screens.signin);
+	};
+
+	function onBtnSend(e){
+		e.preventDefault();
+
+		self.get('iconSubtitle').addClass('icon-spin');
+		self.get('iconSignin').addClass('icon-spin');
+
+		var credentials = {
+			u : $(self.get('txt##userProp.Name##')).val(),
+			p : $(self.get('txt##passProp.Name##')).val()
+		};
+
+		$(self.get('txt##userProp.Name##')).val('');
+		$(self.get('txt##passProp.Name##')).val('');
+
+		iris.resource(iris.path.resource.##acro##).signin(credentials.u, credentials.p, signInOk, signInKo);
+	}
+
+	function signInOk(p_data){
+		iris.navigate('#/##acro##');
+		self.get('iconSubtitle').removeClass('icon-spin');
+		self.get('iconSignin').removeClass('icon-spin');
+	}
+
+	function signInKo(p_data){
+		self.get('iconSubtitle').removeClass('icon-spin');
+		self.get('iconSignin').removeClass('icon-spin');
+	}
+
+}, iris.path.screens.signin.js);</xmp></pre>

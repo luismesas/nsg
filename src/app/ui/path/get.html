@@ -2,9 +2,14 @@
 var ##name## = require('../##name##');
 
 function handler(req, res){
-	var id = req.params.##acro##id;
+	var ##acro##id = req.params.##acro##id;
 
-	##name##.##fn##(id, function(err, ##acro##){
+	// ##Name## 'me'
+	if(##acro##id == 'me'){
+		##acro##id = req.pastry.data.uid;
+	}
+
+	##name##.##fn##(##acro##id, function(err, ##acro##){
 		if(err || ##acro## === null){
 			res.send(400, 'Bad request');
 		} else {

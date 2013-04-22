@@ -14,7 +14,8 @@ iris.path = {
 			get: {js: 'ui/path/get.js', html: 'ui/path/get.html'},
 			post: {js: 'ui/path/post.js', html: 'ui/path/post.html'},
 			del: {js: 'ui/path/del.js', html: 'ui/path/del.html'},
-			generate: {js: 'ui/path/generate.js', html: 'ui/path/generate.html'}
+			generate: {js: 'ui/path/generate.js', html: 'ui/path/generate.html'},
+			signin: {js: 'ui/path/signin.js', html: 'ui/path/signin.html'}
 		},
 		iris : {
 			init : {js: 'ui/iris/init.js', html: 'ui/iris/init.html'},
@@ -29,7 +30,11 @@ iris.path = {
 			create_html: {js: 'ui/iris/create_html.js', html: 'ui/iris/create_html.html'},
 			create_js: {js: 'ui/iris/create_js.js', html: 'ui/iris/create_js.html'},
 			edit_html: {js: 'ui/iris/edit_html.js', html: 'ui/iris/edit_html.html'},
-			edit_js: {js: 'ui/iris/edit_js.js', html: 'ui/iris/edit_js.html'}
+			edit_js: {js: 'ui/iris/edit_js.js', html: 'ui/iris/edit_js.html'},
+			login:{
+				signin_html: {js: 'ui/iris/login/signin_html.js', html: 'ui/iris/login/signin_html.html'},
+				signin_js: {js: 'ui/iris/login/signin_js.js', html: 'ui/iris/login/signin_js.html'}
+			}
 		}
 	}
 };

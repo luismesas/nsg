@@ -25,15 +25,18 @@
 					<legend>DTO</legend>
 					<textarea rows="8" class="span12" data-id="txtDto">{
     "_id": "",
-    "email": "",
+    "email": {
+        "loginuser": true
+    },
     "password": {
         "auto": "random",
-        "length": 8
+        "length": 8,
+        "loginpass": true
     },
-    "created":{
-    	"auto": "date",
-    	"readonly": true
-	},
+    "created" : {
+        "auto": "date",
+        "readonly": true
+    },
     "admin": true
 }</textarea>
 				</form>

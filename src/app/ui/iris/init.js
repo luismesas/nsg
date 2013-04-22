@@ -3,9 +3,19 @@ iris.ui(function(self) {
 	self.create = function() {
 		self.tmplMode(self.APPEND);
 
-		var sintax = self.setting('service');
+		var service = self.setting('service');
 
-		self.tmpl(iris.path.ui.iris.init.html, sintax);
+		var signinScreen = '';
+		var signinEvents = '';
+		if(service.login) {
+			signinScreen += 'iris.path.screens.signin = {js: \'screen/signin.js\', html: \'screen/signin.html\'};\n';
+			signinEvents += '	signin : \'SIGNED_IN\',\n';
+			signinEvents += '	signout : \'SIGNED_OUT\',\n';
+		}
+		service.signinScreen = signinScreen;
+		service.signinEvents = signinEvents;
+
+		self.tmpl(iris.path.ui.iris.init.html, service);
 		prettyPrint();
 	};
 
